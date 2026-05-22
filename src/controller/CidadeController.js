@@ -11,6 +11,18 @@ class CidadeController {
             });
         }
     }
+
+    async all (req, res) {
+        try {
+            const cidades = await CidadeModel.findAll({
+                order: [['nome', 'ASC']]
+            });
+            return res.status(200).json(cidades);
+        } catch (err) {
+            return res.status(500).json({erro: 'Erro ao buscar cidade', 
+                message: err.message})
+        }
+    }
 }
 
 module.exports = new CidadeController;
